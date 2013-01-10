@@ -1,0 +1,35 @@
+{
+  "name" : "grunt-vows-runner",
+  "version" : "0.1.0",
+  "description" : "An alternative to the vows command-line test-runner using grunt. Adds the ability to run test suites in parallel.",
+  "keywords" : ["vows", "test", "testing", "runner", "task", "gruntplugin", "grunt", "bdd", "concurrent", "asynchronous", "parallel"],
+  "author" : {
+    "name" : "Adam Stallard",
+    "email" : "adam@goalzen.org",
+    "url" : "goalzen.org"
+  },
+  "directories" : {
+    "test" : "test"
+  },
+  "dependencies" : {
+    "vows" : "*"
+  },
+  "license" : {
+    "type" : "MIT",
+    "url" : "https://github.com/goalzen/grunt-vows-runner/blob/master/LICENSE-MIT"
+  },
+  "engines" : {
+    "node" : "*"
+  },
+  "scripts" : {
+    "test" : "grunt"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/goalzen/grunt-vows-runner.git"
+  },
+  "bugs" : {
+    "url" : "https://github.com/goalzen/grunt-vows-runner/issues"
+},
+  "homepage" : "https://github.com/goalzen/grunt-vows-runner.git"
+}
