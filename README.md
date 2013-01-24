@@ -12,19 +12,19 @@ tools built into vows, since they are used by many other packages as well.
 
 Thus grunt-vows-runner is a replacement for the vows command-line runner.
 
+###Additions
+
+* The ability to run suites in parallel
+
 ###Differences from the vows command-line runner
 
 * Uses grunt's [task configuration for specifying files](https://github.com/gruntjs/grunt/wiki/Configuring-tasks#Files)
 * No "watch" mode
- * use the grunt "watch" task
+ * use the grunt ``watch`` task
 * No shuffle option (if you want this, let me know--it is easy to implement)
 * No js-coverage support
  * I highly recommend [istanbul](https://github.com/yahoo/istanbul), which does not need the cooperation of the test-runner
- (simply ``istanbul cover bin/vows`` will work ) and is written in javascript, not java
-
-###Additions
-
-* The ability to run suites in parallel
+ (simply ``istanbul cover bin/vows`` will work ); and it is written in javascript, not java
 
 ####Alternatives
 
