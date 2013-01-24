@@ -2,15 +2,17 @@
 
 An alternative test-runner for vows using grunt.
 
-The philosophy behind grunt-vows-runner is that a test-runner shouldn't do anything other than run the tests and
-generate a report.  File/dir matching, file watching, coverage reporting, etc. should all be supplied by third-party tools.
+###Philosophy
+
+A test-runner shouldn't do anything other than run tests and generate a report.  File/dir matching, file watching,
+coverage reporting, etc. should all be supplied by third-party tools.
 
 Grunt is a great source of such third-party-tools.  These are much more likely to continue development than the equivalent
 tools built into vows, since they are used by many other packages as well.
 
 Thus grunt-vows-runner is a replacement for the vows command-line runner.
 
-####Differences from the vows command-line runner
+###Differences from the vows command-line runner
 
 * Uses grunt's [task configuration for specifying files](https://github.com/gruntjs/grunt/wiki/Configuring-tasks#Files)
 * No "watch" mode
@@ -20,7 +22,7 @@ Thus grunt-vows-runner is a replacement for the vows command-line runner.
  * I highly recommend [istanbul](https://github.com/yahoo/istanbul), which does not need the cooperation of the test-runner
  (simply ``istanbul cover bin/vows`` will work ) and is written in javascript, not java
 
-#####Additions
+###Additions
 
 * The ability to run suites in parallel
 
