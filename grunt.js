@@ -29,6 +29,11 @@ module.exports = function(grunt) {
         trailing: true
       },
       globals: {}
+    },
+    vows: {
+      bob : {
+        files : ["test/sampleTest.js"]
+      }
     }
   });
 
@@ -36,6 +41,6 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
 
   // Default task.
-  grunt.registerTask('default', 'lint');
+  grunt.registerTask('default', 'vows');
 
 };
