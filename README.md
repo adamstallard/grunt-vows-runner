@@ -26,7 +26,7 @@ Thus grunt-vows-runner is a replacement for the vows command-line runner.
  * I highly recommend [istanbul](https://github.com/yahoo/istanbul), which does not need the cooperation of the test-runner
  (simply ``istanbul cover bin/vows`` will work ); and it is written in javascript, not java
 
-####Alternatives
+###Alternatives
 
 If you would like a grunt plugin that simply forwards options to the vows command-line runner,
 see [grunt-vows](https://github.com/CMTegner/grunt-vows).
