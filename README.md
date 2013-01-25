@@ -4,8 +4,7 @@ An alternative test-runner for vows using grunt.
 
 ###Philosophy
 
-A test-runner shouldn't do anything other than run tests and generate a report.  File/dir matching, file watching,
-coverage reporting, etc. should all be supplied by third-party tools.
+File/dir matching, file watching, coverage reporting, etc. should all be supplied by third-party tools where possible.
 
 Grunt is a great source of such third-party-tools.  These are much more likely to continue development than the equivalent
 tools built into vows, since they are used by many other packages as well.
