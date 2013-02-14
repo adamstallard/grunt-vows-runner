@@ -32,7 +32,7 @@ module.exports = function(grunt) {
     },
     vows: {
       bob : {
-        files : ["test/sampleTest.js"]
+        src : ['test/input/true.js']
       }
     }
   });

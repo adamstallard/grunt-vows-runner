@@ -15,10 +15,7 @@
   },
   "dependencies" : {
     "vows" : "*",
-    "grunt" : "~0.3"
-  },
-  "devDependencies" : {
-    "grunt" : "*"
+    "grunt" : "~0.4"
   },
   "license" : {
     "type" : "MIT",
