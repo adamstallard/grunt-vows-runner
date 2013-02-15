@@ -1,5 +1,8 @@
+var _ = require('underscore');
+
 function StringWriter(){
   this.String = "";
+  _.bindAll(this);
 };
 
 StringWriter.prototype = {

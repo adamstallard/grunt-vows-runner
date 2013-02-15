@@ -8,17 +8,15 @@ module.exports = function(grunt){
 
     if (this.filesSrc.length) {
       grunt.log.oklns('vows: running tests: ' + this.filesSrc);
-      runner.run(this.filesSrc, done);
+      options = {
+        reporter : "spec"
+      };
+      runner.run(this.filesSrc, options, done);
     }
     else {
       grunt.log.error('vows: no test files');
       done();
     }
-
-//    testFiles.forEach(function(file){
-//      var x = require('../' + file);
-//      console.dir(x.true);
-//    });
 
   });
 };

@@ -1,12 +1,16 @@
 var util = require('util');
+
+var async = require('async');
+var _ = require('underscore');
+
 var cutils = require('../../node_modules/vows/lib/vows/console');
 var stylize = require('../../node_modules/vows/lib/vows/console').stylize;
 
+var SuiteRunner = require('./SuiteRunner');
+
 //var _reporter = require('../../node_modules/vows/lib/vows/reporters/spec');
 
-var reporters = {
-  spec : "../../node_modules/vows/lib/vows/reporters/spec"
-}
+
 
 //var reporter = {
 //  name: _reporter.name
@@ -25,29 +29,21 @@ var options = {
 
 cutils.nocolor = options.nocolor;
 
+function run(files, options, done){
+  var file, suite;
+  var suites = [];
 
+  for (i in files){
+    file = require('../../' + files[i]);
+    //console.dir(file);
+    _.forEach(file, function(suite){
+      suite._filename = files[i];
+      var runner = new SuiteRunner(suite, options);
+      suites.push(runner.run);
+    });
+  }
 
-function prepareSuites(files){
-  return files.reduce(function (suites, f) {
-    var obj = require('../../' + f);
-    return suites.concat(Object.keys(obj).map(function (s) {
-      obj[s]._filename = f;
-      return obj[s];
-    }));
-  }, []);
-
-}
-
-function run(files, done){
-  var suites = prepareSuites(files);
-
-  suites.forEach(function(suite){
-    delete require.cache[require.resolve(reporters.spec)];
-    var reporter = require(reporters.spec);
-    reporter.setStream();
-
-    reporter.print('hello\n');
-
+  async.parallel(suites, done);
 
 //    var reporter = .report = function (data, filename) {
 //      switch (data[0]) {
@@ -72,9 +68,6 @@ function run(files, done){
 //    reporter.reset = function () { _reporter.reset && _reporter.reset() };
 //    reporter.print = _reporter.print;
 //    suite.run()
-  });
-
-  done();
 
 //  runSuites(suites, function (results) {
 //    var status = results.errored ? 2 : (results.broken ? 1 : 0);
