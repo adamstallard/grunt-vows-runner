@@ -1,15 +1,12 @@
 ##grunt-vows-runner
 
-An test-runner for vows using grunt.
+A test-runner for vows using grunt.
 
 ###Philosophy
 
-File/dir matching, file watching, coverage reporting, etc. should all be supplied by third-party tools where possible.
-
+File and directory matching, file watching, coverage reporting, etc. should be supplied by third-party tools where possible.
 Grunt is a great source of such third-party-tools.  These are much more likely to continue development than the equivalent
 tools built into vows, since they are used by many other packages as well.
-
-Thus grunt-vows-runner is a replacement for the vows command-line runner.
 
 ###Additions
 
@@ -26,6 +23,110 @@ Thus grunt-vows-runner is a replacement for the vows command-line runner.
 * No built-in js-coverage support
  * I highly recommend [istanbul](https://github.com/yahoo/istanbul), which does not need the cooperation of the test-runner
  (simply ``istanbul cover bin/vows`` will work ); and it is written in javascript, not java
+
+###Installation
+
+1. Change directories to the root directory of your project
+2. ``npm install grunt-vows-runner``
+
+###Usage
+
+Add the following line to your ``Gruntfile.js``
+    grunt.loadNpmTasks('grunt-vows-runner');
+
+The ``vows`` task is now available; for example
+
+    grunt vows
+
+###Configuration
+
+Configuration is placed in the ``grunt.initConfig`` section of your ``Gruntfile.js`` file in the ``vows`` object.
+
+``vows`` is a [multitask](https://github.com/gruntjs/grunt/wiki/Creating-tasks#wiki-multitasks).
+
+Each target references one or more source files containing suites and may contain options which will be applied to all of those
+suites.
+
+An example ``vows`` configuration with two targets:
+
+    ...
+    vows : {
+      all : {
+        src : "<%= allTests %>",
+        options : {
+          runner : "spec"
+        }
+      },
+      allXunit : {
+        src : "<%= allTests %>",
+        dest : "testResults.xml"
+        options : {
+          runner : "xunit"
+        }
+      }
+    },
+    allTests : "tests/*"
+    ...
+
+The example above uses the [_compact format_ for specifying files](https://github.com/gruntjs/grunt/wiki/Configuring-tasks#wiki-files)
+as well as [templates](https://github.com/gruntjs/grunt/wiki/Configuring-tasks#wiki-files).
+
+One destination file (``dest``) can be specified per target.  It will contain the output of all the suites in the target.  If no
+destination file is specified, the output will go to the console.
+
+Results are summed by target.  Grunt-vows-runner doesn't combine the results of multiple targets.
+
+Suites within a target are run concurrently; faster suites will finish first.  Targets in grunt are always run sequentially.
+
+####Options
+
+Options can be placed at the task (``vows``), target, or suite level.
+
+Here is an example of each:
+
+#####Task and Target Level
+
+_Gruntfile.js_
+
+    ...
+    vows : {
+      options : {
+        runner : "spec"
+      },
+      most : {
+        src : ["test/*", "!test/chattyTests.js"]
+      },
+      chatty : {
+        src : "test/chattyTests.js",
+        options : {
+          reporter : "silent"
+        }
+      }
+    }
+    ...
+
+#####Suite Level Options
+
+_test/errorTests.js_
+
+    ...
+    vows.describe('Error Handling').addBatch({
+    ...
+    }).export(module, {error : false});
+    ...
+
+#####Available Options
+
+######All Levels
+
+* ``error``
+* ``reporter``
+* ``matcher``
+
+######Task (``vows``) Level Only
+
+* ``nocolor``
+* ``isolate``
 
 ###Alternatives
 
