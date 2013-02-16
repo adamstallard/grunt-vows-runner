@@ -11,7 +11,7 @@ tools built into vows, since they are used by many other packages as well.
 ###Additions
 
 * Uses grunt [tasks](https://github.com/gruntjs/grunt/wiki/Configuring-tasks) and [templates]
-(https://github.com/gruntjs/grunt/wiki/Configuring-tasks#Templates)
+(https://github.com/gruntjs/grunt/wiki/Configuring-tasks#wiki-templates)
 * Runs suites in the same task concurrently
 * Sets options at the task level
 
