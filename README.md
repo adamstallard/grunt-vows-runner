@@ -1,6 +1,6 @@
 ##grunt-vows-runner
 
-An alternative test-runner for vows using grunt.
+An test-runner for vows using grunt.
 
 ###Philosophy
 
