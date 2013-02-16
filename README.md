@@ -17,7 +17,7 @@ tools built into vows, since they are used by many other packages as well.
 
 ###Differences from the vows command-line runner
 
-* Uses grunt to specify which [files](https://github.com/gruntjs/grunt/wiki/Configuring-tasks#Files) to run
+* Uses grunt to specify which [files](https://github.com/gruntjs/grunt/wiki/Configuring-tasks#wiki-files) to run
 * Uses grunt's ``watch`` task instead of vows' built-in watch implementation
 * No shuffle option (if you want this, let me know--it is easy to implement)
 * No built-in js-coverage support
