@@ -69,7 +69,7 @@ An example ``vows`` configuration with two targets:
     ...
 
 The example above uses the [_compact format_ for specifying files](https://github.com/gruntjs/grunt/wiki/Configuring-tasks#wiki-files)
-as well as [templates](https://github.com/gruntjs/grunt/wiki/Configuring-tasks#wiki-files).
+as well as [templates](https://github.com/gruntjs/grunt/wiki/Configuring-tasks#wiki-templates).
 
 One destination file (``dest``) can be specified per target.  It will contain the output of all the suites in the target.  If no
 destination file is specified, the output will go to the console.
