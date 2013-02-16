@@ -84,9 +84,7 @@ Options can be placed at the task (``vows``), target, or suite level.
 
 Here is an example of each:
 
-#####Task and Target Level
-
-_Gruntfile.js_
+_Gruntfile.js_ (task- and target-level options)
 
     ...
     vows : {
@@ -105,9 +103,7 @@ _Gruntfile.js_
     }
     ...
 
-#####Suite Level Options
-
-_test/errorTests.js_
+_test/errorTests.js_ (suite-level options)
 
     ...
     vows.describe('Error Handling').addBatch({
@@ -115,18 +111,23 @@ _test/errorTests.js_
     }).export(module, {error : false});
     ...
 
-#####Available Options
+The following options are available:
 
-######All Levels
+#####All Levels
 
 * ``error``
+ * _description_
 * ``reporter``
+ * _description_
 * ``matcher``
+ * _description_
 
-######Task (``vows``) Level Only
+#####Task (``vows``) Level Only
 
 * ``nocolor``
+ * _description_
 * ``isolate``
+ * _description_
 
 ###Alternatives
 
