@@ -8,14 +8,6 @@ var stylize = require('../../node_modules/vows/lib/vows/console').stylize;
 
 var SuiteRunner = require('./SuiteRunner');
 
-//var _reporter = require('../../node_modules/vows/lib/vows/reporters/spec');
-
-
-
-//var reporter = {
-//  name: _reporter.name
-//};
-
 var options = {
   isolate: false,
   nocolor: false
@@ -31,19 +23,28 @@ cutils.nocolor = options.nocolor;
 
 function run(files, options, done){
   var file, suite;
-  var suites = [];
+  var suiteTasks = {};
+  var suiteRunners = [];
+  var i;
 
   for (i in files){
     file = require('../../' + files[i]);
-    //console.dir(file);
     _.forEach(file, function(suite){
       suite._filename = files[i];
-      var runner = new SuiteRunner(suite, options);
-      suites.push(runner.run);
+      console.dir(suite);
+      var suiteRunner = new SuiteRunner(suite, options);
+      suiteRunners.push(suiteRunner);
+      suiteTasks[suite.subject] = suiteRunner.run;
     });
   }
 
-  async.parallel(suites, done);
+  async.parallel(suiteTasks, function(error, results){
+    console.dir(results);
+    for(i in suiteRunners){
+      console.log(suiteRunners[i].getOutput());
+    }
+    //_.forEach(suiteRunners, function(suiteRunners)
+  });
 
 //    var reporter = .report = function (data, filename) {
 //      switch (data[0]) {
