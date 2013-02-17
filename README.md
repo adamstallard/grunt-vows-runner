@@ -118,7 +118,7 @@ The following options are available:
 
 * ``error``
  * Whether or not vows should handle errors in topics for you.  Set ``error : false`` if you want to handle your own errors.
- The first argument in your vows will be reserved for errors.
+ The first argument to your vows will be reserved for errors.
 * ``reporter``
  * silent, spec, json, tap, xunit, dot-matrix.  (Look in [vows/lib/vows/reporters](https://github.com/cloudhead/vows/tree/master/lib/vows/reporters)
   for a complete list.)
