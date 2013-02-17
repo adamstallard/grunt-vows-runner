@@ -14,6 +14,7 @@ tools built into vows, since they are used by many other packages as well.
 (https://github.com/gruntjs/grunt/wiki/Configuring-tasks#wiki-templates)
 * Runs suites in the same task concurrently
 * Sets options at the task level
+* Ability to set the ``isolate`` option at the suite and task level, and to run isolated and non-isolated suites together
 
 ###Differences from the vows command-line runner
 
@@ -121,16 +122,17 @@ The following options are available:
  * _description_
 * ``matcher``
  * _description_
+* ``isolate``
+ * Run each suite in its own process.  This is useful if the system-under-test uses the node process object internally.
 
 #####Task (``vows``) Level Only
 
 * ``nocolor``
- * _description_
-* ``isolate``
- * _description_
+ * Set ``nocolor : true`` to disable colorized text.  This is useful if your console can't display colorized text properly,
+ or you are writing the test results to a file.
 
 ###Alternatives
 
-If you would like a grunt plugin that simply forwards options to the vows command-line runner,
+If you would like a grunt plugin that simply forwards options to the existing vows command-line runner,
 see [grunt-vows](https://github.com/CMTegner/grunt-vows).
 
