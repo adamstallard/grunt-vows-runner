@@ -117,11 +117,14 @@ The following options are available:
 #####All Levels
 
 * ``error``
- * _description_
+ * Whether or not vows should handle errors in topics for you.  Set ``error : false`` if you want to handle your own errors.
+ The first argument in your vows will be reserved for errors.
 * ``reporter``
- * _description_
+ * silent, spec, json, tap, xunit, dot-matrix.  (Look in [vows/lib/vows/reporters](https://github.com/cloudhead/vows/tree/master/lib/vows/reporters)
+  for a complete list.)
 * ``matcher``
- * _description_
+ * a javascript [RegExp object](http://www.w3schools.com/jsref/jsref_obj_regexp.asp); only run tests whose titles match this
+ object.
 * ``isolate``
  * Run each suite in its own process.  This is useful if the system-under-test uses the node process object internally.
 
