@@ -24,14 +24,15 @@ SuiteRunner.prototype = {
   constructor : SuiteRunner,
   run : function(callback){
     var suiteCallback = function(result){
-      callback(null, result);
+      process.nextTick(function (){
+        callback(null, result);
+      });
     };
-
     this.suite.run({}, suiteCallback);
   },
   getOutput : function(){
     return this.stringWriter.toString();
   }
-}
+};
 
 module.exports = SuiteRunner;
