@@ -56,14 +56,14 @@ An example ``vows`` configuration with two targets:
       all : {
         src : "<%= allTests %>",
         options : {
-          runner : "spec"
+          reporter : "spec"
         }
       },
       allXunit : {
         src : "<%= allTests %>",
         dest : "testResults.xml"
         options : {
-          runner : "xunit"
+          reporter : "xunit"
         }
       }
     },
@@ -91,7 +91,7 @@ _Gruntfile.js_ (task- and target-level options)
     ...
     vows : {
       options : {
-        runner : "spec"
+        reporter : "spec"
       },
       most : {
         src : ["test/*", "!test/chattyTests.js"]
