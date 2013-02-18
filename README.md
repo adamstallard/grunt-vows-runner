@@ -1,6 +1,6 @@
 ##grunt-vows-runner
 
-A test-runner for vows using grunt.
+A test-runner for vows using [grunt](http://gruntjs.com/).
 
 ###Philosophy
 
@@ -10,16 +10,15 @@ tools built into vows, since they are used by many other packages as well.
 
 ###Additions
 
-* Uses grunt [tasks](https://github.com/gruntjs/grunt/wiki/Configuring-tasks) and [templates]
-(https://github.com/gruntjs/grunt/wiki/Configuring-tasks#wiki-templates)
-* Runs suites in the same [target](https://github.com/gruntjs/grunt/wiki/Configuring-tasks#wiki-taskconfigurationandtargets)
+* Uses grunt [tasks](http://gruntjs.com/configuring-tasks) and [templates](http://gruntjs.com/configuring-tasks#templates)
+* Runs suites in the same [target](http://gruntjs.com/configuring-tasks#task-configuration-and-targets)
 concurrently
 * Sets options at the target level
 * Ability to set the ``isolate`` option at the suite and target level, and to run isolated and non-isolated suites together
 
 ###Differences from the vows command-line runner
 
-* Uses grunt to specify which [files](https://github.com/gruntjs/grunt/wiki/Configuring-tasks#wiki-files) to run
+* Uses grunt to specify which [files](http://gruntjs.com/configuring-tasks#files) to run
 * Uses grunt's ``watch`` task instead of vows' built-in watch implementation
 * No shuffle option (if you want this, let me know--it is easy to implement)
 * No built-in js-coverage support
@@ -44,7 +43,7 @@ The ``vows`` task is now available; for example
 
 Configuration is placed in the ``grunt.initConfig`` section of your ``Gruntfile.js`` file in the ``vows`` object.
 
-``vows`` is a [multitask](https://github.com/gruntjs/grunt/wiki/Creating-tasks#wiki-multitasks).
+``vows`` is a [multitask](http://gruntjs.com/creating-tasks#multi-tasks).
 
 Each target references one or more source files containing suites and may contain options which will be applied to all of those
 suites.
@@ -70,8 +69,8 @@ An example ``vows`` configuration with two targets:
     allTests : "tests/*"
     ...
 
-The example above uses the [_compact format_ for specifying files](https://github.com/gruntjs/grunt/wiki/Configuring-tasks#wiki-files)
-as well as [templates](https://github.com/gruntjs/grunt/wiki/Configuring-tasks#wiki-templates).
+The example above uses the [_compact format_ for specifying files](http://gruntjs.com/configuring-tasks#compact-format)
+as well as [templates](http://gruntjs.com/configuring-tasks#templates).
 
 One destination file (``dest``) can be specified per target.  It will contain the output of all the suites in the target.  If no
 destination file is specified, the output will go to the console.
