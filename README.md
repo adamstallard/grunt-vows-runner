@@ -12,7 +12,8 @@ tools built into vows, since they are used by many other packages as well.
 
 * Uses grunt [tasks](https://github.com/gruntjs/grunt/wiki/Configuring-tasks) and [templates]
 (https://github.com/gruntjs/grunt/wiki/Configuring-tasks#wiki-templates)
-* Runs suites in the same target concurrently
+* Runs suites in the same [target](https://github.com/gruntjs/grunt/wiki/Configuring-tasks#wiki-taskconfigurationandtargets)
+concurrently
 * Sets options at the target level
 * Ability to set the ``isolate`` option at the suite and target level, and to run isolated and non-isolated suites together
 
