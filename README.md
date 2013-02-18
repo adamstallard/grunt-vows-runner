@@ -33,6 +33,7 @@ concurrently
 ###Usage
 
 Add the following line to your ``Gruntfile.js``
+
     grunt.loadNpmTasks('grunt-vows-runner');
 
 The ``vows`` task is now available; for example
