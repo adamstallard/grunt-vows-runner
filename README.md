@@ -12,11 +12,11 @@ tools built into vows, since they are used by many other packages as well.
 
 With grunt-vows-runner you can
 
-* Use grunt [tasks](http://gruntjs.com/configuring-tasks) and [templates](http://gruntjs.com/configuring-tasks#templates)
+* Use grunt [tasks](http://gruntjs.com/configuring-tasks) and [templates](http://gruntjs.com/configuring-tasks#templates).
 * Run suites in the same [target](http://gruntjs.com/configuring-tasks#task-configuration-and-targets)
-concurrently
-* Set options at the target level
-* Set the ``isolate`` option at the suite and target level, and run isolated and non-isolated suites together
+concurrently.
+* Set options at the target level.
+* Set the ``isolate`` option at the suite and target level, and run isolated and non-isolated suites concurrently.
 
 ###Differences from the vows command-line runner
 
