@@ -75,8 +75,14 @@ module.exports = function(grunt){
         endReporter = new SuiteRunner(vows.describe('End Totals'), options);
         endReporter.reportTotals(totals);
         grunt.log.oklns(endReporter.getOutput());
+        grunt.verbose.writeflags(totals);
 
-        done();
+        if(totals.errored || totals.broken){
+          done(false)
+        }
+        else{
+          done();
+        }
       });
     }
     else {
