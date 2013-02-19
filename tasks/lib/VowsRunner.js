@@ -1,7 +1,8 @@
 var util = require('util');
 
-var async = require('async');
-var _ = require('underscore');
+var grunt = require('grunt');
+var async = grunt.util.async;
+var _ = grunt.util._;
 
 var cutils = require('../../node_modules/vows/lib/vows/console');
 var stylize = require('../../node_modules/vows/lib/vows/console').stylize;
@@ -22,29 +23,6 @@ var options = {
 cutils.nocolor = options.nocolor;
 
 function run(files, options, done){
-  var file, suite;
-  var suiteTasks = {};
-  var suiteRunners = [];
-  var i;
-
-  for (i in files){
-    file = require('../../' + files[i]);
-    _.forEach(file, function(suite){
-      suite._filename = files[i];
-      console.dir(suite);
-      var suiteRunner = new SuiteRunner(suite, options);
-      suiteRunners.push(suiteRunner);
-      suiteTasks[suite.subject] = suiteRunner.run;
-    });
-  }
-
-  async.parallel(suiteTasks, function(error, results){
-    console.dir(results);
-    for(i in suiteRunners){
-      console.log(suiteRunners[i].getOutput());
-    }
-    //_.forEach(suiteRunners, function(suiteRunners)
-  });
 
 //    var reporter = .report = function (data, filename) {
 //      switch (data[0]) {

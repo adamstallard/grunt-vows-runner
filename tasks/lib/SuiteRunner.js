@@ -8,13 +8,22 @@ function SuiteRunner(suite, options){
   this.suite = suite;
   this.stringWriter = new StringWriter();
 
-  if(options.reporter){
+  options = options || {};
+
+  var defaultOptions = {
+    reporter : "dot-matrix"
+  };
+
+  _.defaults(options, defaultOptions);
+
+  if(!suite.options.reporter){
     var reporterPath = reporterBasePath + options.reporter;
     delete require.cache[require.resolve(reporterPath)];
     options.reporter = require(reporterPath);
   }
 
-  _.extend(suite.options, options);
+  _.defaults(suite.options, options);
+
   suite.options.reporter.setStream(this.stringWriter);
 
   _.bindAll(this);
@@ -25,9 +34,9 @@ SuiteRunner.prototype = {
   run : function(callback){
     var suiteCallback = function(result){
       process.nextTick(function (){
-        callback(null, result);
-      });
-    };
+        callback(null, result, this.getOutput());
+      }.bind(this));
+    }.bind(this);
     this.suite.run({}, suiteCallback);
   },
   getOutput : function(){

@@ -76,6 +76,8 @@ as well as [templates](http://gruntjs.com/configuring-tasks#templates).
 One destination file (``dest``) can be specified per target.  It will contain the output of all the suites in the target.  If no
 destination file is specified, the output will go to the console.
 
+Paths for both source and destination files are relative to the directory that the ``Gruntfile.js`` is in.
+
 Results are summed by target.  Grunt-vows-runner doesn't combine the results of multiple targets.
 
 Suites within a target are run concurrently; faster suites will finish first.  Targets in grunt are always run sequentially.

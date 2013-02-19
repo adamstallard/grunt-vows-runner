@@ -31,8 +31,19 @@ module.exports = function(grunt) {
       globals: {}
     },
     vows: {
-      bob : {
-        src : ['test/input/true.js']
+      options : {
+        reporter : "spec",
+        taskLevelOption : "something"
+      },
+      ally : {
+        options : {
+          targetLevelOption : "something"
+        },
+        src : ['test/*.js']
+      },
+      foo : {
+        src : ['test/*.js'],
+        dest : 'bar'
       }
     }
   });
