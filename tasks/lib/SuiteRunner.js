@@ -32,15 +32,13 @@ function SuiteRunner(suite, options){
     report : function(data, filename){
       // defer the finish command until all the suites in the task are done, so we can output the grand totals
       if (data[0] === 'finish') {
-        this.stringWriter.write(' ');
+        this.stringWriter.write(' \n');
       }
       else
       {
         this.reporter.report(data, filename);
       }
-    }.bind(this),
-    reset : this.reporter.reset || function(){},
-    print : this.reporter.print
+    }.bind(this)
   };
 
   _.bindAll(this);
@@ -58,6 +56,9 @@ SuiteRunner.prototype = {
   },
   getOutput : function(){
     return this.stringWriter.toString();
+  },
+  reportTotals : function(totals){
+    this.reporter.report(['finish', totals], this.stringWriter);
   }
 };
 

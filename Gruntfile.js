@@ -41,16 +41,14 @@ module.exports = function(grunt) {
         src : ['test/*.js'],
         dest : 'out.xml',
         options : {
-          reporter : "xunit",
-          disable : true
+          reporter : "xunit"
         }
       },
       json : {
         src : ['test/*.js'],
         dest : 'out.json',
         options : {
-          reporter : "json",
-          disable : true
+          reporter : "json"
         }
       }
     }

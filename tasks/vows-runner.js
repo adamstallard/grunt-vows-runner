@@ -38,7 +38,6 @@ module.exports = function(grunt){
       var async = grunt.util.async;
 
       var suiteTasks = {};
-      var suiteRunners = [];
 
       _.forEach(files, function(filename){
         var fullFilename = '../' + filename;
@@ -47,7 +46,6 @@ module.exports = function(grunt){
         _.forEach(file, function(suite){
           suite._filename = filename;
           var suiteRunner = new SuiteRunner(suite, options);
-          suiteRunners.push(suiteRunner);
           suiteTasks[suite.subject] = function(callback){
             suiteRunner.run(function(error, result, output){
               if(outputFile){
@@ -64,10 +62,21 @@ module.exports = function(grunt){
 
       vows.suites = [];
 
-      async.parallel(suiteTasks, function(error, result){
-        console.dir(result);
+      async.parallel(suiteTasks, function(error, results){
+        var endReporter;
+
+        totals = _.reduce(results, function(subTotals, result){
+          return _.reduce(result, function(x, total, header){
+            x[header] = total + subTotals[header];
+            return x;
+          }, {});
+        });
+
+        endReporter = new SuiteRunner(vows.describe('End Totals'), options);
+        endReporter.reportTotals(totals);
+        grunt.log.oklns(endReporter.getOutput());
+
         done();
-        //_.forEach(suiteRunners, function(suiteRunners)
       });
     }
     else {
