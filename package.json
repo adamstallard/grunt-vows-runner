@@ -16,7 +16,6 @@
   "dependencies" : {
     "vows" : "*",
     "grunt" : "~0.4",
-    "async" : "*",
     "underscore" : "*"
   },
   "license" : {
