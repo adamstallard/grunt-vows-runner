@@ -3,7 +3,7 @@ var vows = require('vows');
 var SuiteRunner = require('../tasks/lib/SuiteRunner');
 
 vows.describe('options').addBatch({
-  "task- and target- level options" : {
+  "Task- and target-level options" : {
     "\n\tA suite in a SuiteRunner" : {
       topic : function(){
         var suite = vows.describe('suite');
@@ -21,12 +21,6 @@ vows.describe('options').addBatch({
       },
       "should not inherit options that already exist on the suite-level" : function(topic){
         assert(topic.suite.options.foo !== 'baz', "suite option was over-written");
-      },
-      "should inherit task-level options from grunt" : function(topic){
-        assert(topic.suite.options.taskLevelOption, "taskLevelOption not found");
-      },
-      "should inherit target-level options from grunt" : function(topic){
-        assert(topic.suite.options.targetLevelOption, "targetLevelOption not found");
       }
     }
   }

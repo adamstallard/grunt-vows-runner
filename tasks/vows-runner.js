@@ -15,6 +15,10 @@ module.exports = function(grunt){
       grunt.verbose.subhead(targetName + ' options').writeflags(options);
       grunt.verbose.oklns(targetName + ' running tests: ' + files);
       if (outputFile) {
+        grunt.verbose.writeln(targetName + ' deleting output file');
+        try {
+          fs.unlinkSync(outputFile);
+        } catch(e) {}
         grunt.verbose.writeln(targetName + ' writing output to "' + outputFile + '"');
       }
       else {
@@ -28,7 +32,10 @@ module.exports = function(grunt){
       var suiteRunners = [];
 
       _.forEach(files, function(filename){
-        _.forEach(require('../' + filename), function(suite){
+        var fullFilename = '../' + filename;
+        delete require.cache[require.resolve(fullFilename)];
+        var file = require(fullFilename);
+        _.forEach(file, function(suite){
           suite._filename = filename;
           var suiteRunner = new SuiteRunner(suite, options);
           suiteRunners.push(suiteRunner);

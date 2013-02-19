@@ -32,18 +32,17 @@ module.exports = function(grunt) {
     },
     vows: {
       options : {
-        reporter : "spec",
-        taskLevelOption : "something"
+        reporter : "spec"
       },
-      ally : {
-        options : {
-          targetLevelOption : "something"
-        },
+      all : {
         src : ['test/*.js']
       },
-      foo : {
+      xunit : {
         src : ['test/*.js'],
-        dest : 'bar'
+        dest : 'bar',
+        options : {
+          reporter : "xunit"
+        }
       }
     }
   });

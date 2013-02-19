@@ -16,6 +16,9 @@ function SuiteRunner(suite, options){
 
   _.defaults(options, defaultOptions);
 
+  console.dir(options);
+  console.dir(suite.options);
+
   if(!suite.options.reporter){
     var reporterPath = reporterBasePath + options.reporter;
     delete require.cache[require.resolve(reporterPath)];
@@ -23,6 +26,10 @@ function SuiteRunner(suite, options){
   }
 
   _.defaults(suite.options, options);
+
+  if(options.error === false){
+    suite.options.error = false;
+  }
 
   suite.options.reporter.setStream(this.stringWriter);
 
