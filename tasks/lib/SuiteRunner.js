@@ -16,9 +16,6 @@ function SuiteRunner(suite, options){
 
   _.defaults(options, defaultOptions);
 
-  console.dir(options);
-  console.dir(suite.options);
-
   if(!suite.options.reporter){
     var reporterPath = reporterBasePath + options.reporter;
     delete require.cache[require.resolve(reporterPath)];
