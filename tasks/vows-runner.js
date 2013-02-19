@@ -63,16 +63,14 @@ module.exports = function(grunt){
       vows.suites = [];
 
       async.parallel(suiteTasks, function(error, results){
-        var endReporter;
-
-        totals = _.reduce(results, function(subTotals, result){
+        var totals = _.reduce(results, function(subTotals, result){
           return _.reduce(result, function(x, total, header){
             x[header] = total + subTotals[header];
             return x;
           }, {});
         });
 
-        endReporter = new SuiteRunner(vows.describe('End Totals'), options);
+        var endReporter = new SuiteRunner(vows.describe('End Totals'), options);
         endReporter.reportTotals(totals);
         grunt.log.oklns(endReporter.getOutput());
         grunt.verbose.writeflags(totals);
