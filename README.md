@@ -14,7 +14,7 @@ tools built into vows, since they are used by many other packages as well.
 * Runs suites in the same [target](http://gruntjs.com/configuring-tasks#task-configuration-and-targets)
 concurrently
 * Sets options at the target level
-* Ability to set the ``isolate`` option at the suite and target level, and to run isolated and non-isolated suites together
+* Can set the ``isolate`` option at the suite and target level, and run isolated and non-isolated suites together
 
 ###Differences from the vows command-line runner
 
