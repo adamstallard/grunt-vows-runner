@@ -1,7 +1,10 @@
 var fs = require('fs');
 var SuiteRunner = require('./lib/SuiteRunner');
+var vowsConsole = require('../node_modules/vows/lib/vows/console');
 
 module.exports = function(grunt){
+
+  vowsConsole.nocolor = grunt.option('no-color');
 
   grunt.registerMultiTask('vows', 'Runs vows tests.', function(){
     var files = this.files[0].src;

@@ -117,8 +117,6 @@ _test/errorTests.js_ (suite-level options)
 
 The following options are available:
 
-#####All Levels
-
 * ``error``
  * Whether or not vows should handle errors in topics for you.  Set ``error : false`` if you want to handle your own errors.
  The first argument to your vows will be reserved for errors.
@@ -130,12 +128,6 @@ The following options are available:
  object.
 * ``isolate``
  * Run each suite in its own process.  This is useful if the system-under-test uses the node process object internally.
-
-#####Task (``vows``) Level Only
-
-* ``nocolor``
- * Set ``nocolor : true`` to disable colorized text.  This is useful if your console can't display colorized text properly,
- or you are writing the test results to a file.
 
 ###Alternatives
 

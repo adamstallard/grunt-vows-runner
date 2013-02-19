@@ -39,9 +39,16 @@ module.exports = function(grunt) {
       },
       xunit : {
         src : ['test/*.js'],
-        dest : 'bar',
+        dest : 'out.xml',
         options : {
           reporter : "xunit"
+        }
+      },
+      json : {
+        src : ['test/*.js'],
+        dest : 'out.json',
+        options : {
+          reporter : "json"
         }
       }
     }
