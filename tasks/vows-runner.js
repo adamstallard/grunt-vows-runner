@@ -1,6 +1,7 @@
 var fs = require('fs');
 var SuiteRunner = require('./lib/SuiteRunner');
-var vowsConsole = require('../node_modules/vows/lib/vows/console');
+var vowsConsole = require('vows/lib/vows/console');
+var vows = require('vows');
 
 module.exports = function(grunt){
 
@@ -10,9 +11,14 @@ module.exports = function(grunt){
     var files = this.files[0].src;
     var targetName = this.name + ':' + this.target;
     var done = this.async();
+    var options = this.options();
+    if(options.disable){
+      grunt.log.ok(targetName + ' tests disabled');
+      done();
+      return;
+    }
 
     if (files.length) {
-      var options = this.options();
       var outputFile = this.files[0].dest;
 
       grunt.verbose.subhead(targetName + ' options').writeflags(options);
@@ -55,6 +61,8 @@ module.exports = function(grunt){
           }
         });
       });
+
+      vows.suites = [];
 
       async.parallel(suiteTasks, function(error, result){
         console.dir(result);

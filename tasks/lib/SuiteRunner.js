@@ -1,8 +1,8 @@
-var _ = require('underscore');
+var _ = require('grunt').util._;
 
 var StringWriter = require('./StringWriter');
 
-var reporterBasePath = "../../node_modules/vows/lib/vows/reporters/";
+var reporterBasePath = "vows/lib/vows/reporters/";
 
 function SuiteRunner(suite, options){
   this.suite = suite;
@@ -15,20 +15,33 @@ function SuiteRunner(suite, options){
   };
 
   _.defaults(options, defaultOptions);
-
-  if(!suite.options.reporter){
-    var reporterPath = reporterBasePath + options.reporter;
-    delete require.cache[require.resolve(reporterPath)];
-    options.reporter = require(reporterPath);
-  }
-
   _.defaults(suite.options, options);
-
-  if(options.error === false){
+  // special case: options.error : false set on the task/target overrides options.error : true on the suite
+  if (options.error === false) {
     suite.options.error = false;
   }
 
-  suite.options.reporter.setStream(this.stringWriter);
+  var reporterPath = reporterBasePath + suite.options.reporter;
+
+  delete require.cache[require.resolve(reporterPath)];
+  this.reporter = require(reporterPath);
+
+  this.reporter.setStream(this.stringWriter);
+
+  suite.options.reporter = {
+    report : function(data, filename){
+      // defer the finish command until all the suites in the task are done, so we can output the grand totals
+      if (data[0] === 'finish') {
+        this.stringWriter.write(' ');
+      }
+      else
+      {
+        this.reporter.report(data, filename);
+      }
+    }.bind(this),
+    reset : this.reporter.reset || function(){},
+    print : this.reporter.print
+  };
 
   _.bindAll(this);
 }
@@ -37,7 +50,7 @@ SuiteRunner.prototype = {
   constructor : SuiteRunner,
   run : function(callback){
     var suiteCallback = function(result){
-      process.nextTick(function (){
+      process.nextTick(function(){
         callback(null, result, this.getOutput());
       }.bind(this));
     }.bind(this);

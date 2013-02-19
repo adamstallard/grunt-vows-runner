@@ -17,6 +17,7 @@ With grunt-vows-runner you can
 concurrently.
 * Set options at the target level.
 * Set the ``isolate`` option at the suite and target level, and run isolated and non-isolated suites concurrently.
+* Disable groups of tests at the target level
 
 ###Differences from the vows command-line runner
 
@@ -130,6 +131,8 @@ The following options are available:
  object.
 * ``isolate``
  * Run each suite in its own process.  This is useful if the system-under-test uses the node process object internally.
+* ``disable``
+ * Temporarily disable tests for a target.
 
 ###Alternatives
 
