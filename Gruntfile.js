@@ -52,6 +52,9 @@ module.exports = function(grunt) {
           reporter : "json",
           disabled : true
         }
+      },
+      vows : {
+        src : ['node_modules/vows/test/*.js']
       }
     }
   });
