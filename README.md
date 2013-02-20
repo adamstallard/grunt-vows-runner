@@ -134,6 +134,13 @@ The following options are available:
 * ``disabled``
  * Temporarily disable tests for a target.
 
+###Command-Line Options
+
+grunt-vows-runner incorporates the following grunt command-line options, if present:
+
+* ``--no-color``
+* ``--verbose``
+
 ###Alternatives
 
 If you would like a grunt plugin that simply forwards options to the existing vows command-line runner,
