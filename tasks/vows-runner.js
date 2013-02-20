@@ -43,19 +43,12 @@ module.exports = function(grunt){
           var suiteRunner = new SuiteRunner(suite, options);
           suiteTasks[suite.subject] = function(callback){
             suiteRunner.run(function(error, result, output){
-              if(outputFile){
-                fs.appendFileSync(outputFile, output);
-              }
-              else{
-                grunt.log.oklns(output);
-              }
+              writeOutput(output);
               callback(error, result);
             });
           }
         });
       });
-
-      vows.suites = [];
 
       async.parallel(suiteTasks, function(error, results){
         var totals = _.reduce(results, function(subTotals, result){
@@ -64,12 +57,11 @@ module.exports = function(grunt){
             return x;
           }, {});
         });
-
         var endReporter = new SuiteRunner(vows.describe('End Totals'), options);
         endReporter.reportTotals(totals);
-        grunt.log.oklns(endReporter.getOutput());
+        writeOutput(endReporter.getOutput());
+        grunt.log.ok(targetName + " done");
         grunt.verbose.writeflags(totals);
-
         if(totals.errored || totals.broken){
           done(false)
         }
@@ -77,6 +69,17 @@ module.exports = function(grunt){
           done();
         }
       });
+
+      function writeOutput(output){
+        if(outputFile){
+          fs.appendFileSync(outputFile, output);
+        }
+        else{
+          grunt.log.oklns(output);
+        }
+      }
+
+      vows.suites = []; //so it doesn't try to do anything on process.exit (see "vows.js")
     }
     else {
       grunt.log.error(targetName + ' no test files');

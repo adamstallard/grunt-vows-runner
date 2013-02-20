@@ -50,7 +50,7 @@ module.exports = function(grunt) {
         dest : 'out.json',
         options : {
           reporter : "json",
-          disabled : true
+          disabled : false
         }
       },
       vows : {
