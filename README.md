@@ -131,7 +131,7 @@ The following options are available:
  object.
 * ``isolate``
  * Run each suite in its own process.  This is useful if the system-under-test uses the node process object internally.
-* ``disable``
+* ``disabled``
  * Temporarily disable tests for a target.
 
 ###Alternatives

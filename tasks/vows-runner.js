@@ -12,7 +12,7 @@ module.exports = function(grunt){
     var targetName = this.name + ':' + this.target;
     var done = this.async();
     var options = this.options();
-    if(options.disable){
+    if(options.disabled){
       grunt.log.ok(targetName + ' tests disabled');
       done();
       return;
