@@ -17,12 +17,10 @@ module.exports = function(grunt){
       done();
       return;
     }
+    grunt.verbose.subhead(targetName + ' options').writeflags(options);
 
     if (files.length) {
       var outputFile = this.files[0].dest;
-
-      grunt.verbose.subhead(targetName + ' options').writeflags(options);
-      grunt.verbose.oklns(targetName + ' running tests: ' + files);
       if (outputFile) {
         grunt.verbose.writeln(targetName + ' deleting output file');
         try {
@@ -30,13 +28,9 @@ module.exports = function(grunt){
         } catch(e) {}
         grunt.verbose.writeln(targetName + ' writing output to "' + outputFile + '"');
       }
-      else {
-        grunt.log.subhead(targetName + ' test output');
-      }
 
       var _ = grunt.util._;
       var async = grunt.util.async;
-
       var suiteTasks = {};
 
       _.forEach(files, function(filename){
@@ -45,6 +39,7 @@ module.exports = function(grunt){
         var file = require(fullFilename);
         _.forEach(file, function(suite){
           suite._filename = filename;
+          grunt.verbose.writeln(targetName + ' starting "' + suite.subject + '"');
           var suiteRunner = new SuiteRunner(suite, options);
           suiteTasks[suite.subject] = function(callback){
             suiteRunner.run(function(error, result, output){

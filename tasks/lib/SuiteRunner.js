@@ -34,8 +34,7 @@ function SuiteRunner(suite, options){
       if (data[0] === 'finish') {
         this.stringWriter.write(' \n');
       }
-      else
-      {
+      else {
         this.reporter.report(data, filename);
       }
     }.bind(this)
