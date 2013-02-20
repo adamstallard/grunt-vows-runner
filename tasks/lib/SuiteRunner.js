@@ -30,7 +30,7 @@ function SuiteRunner(suite, options){
 
   suite.options.reporter = {
     report : function(data, filename){
-      // defer the finish command until all the suites in the task are done, so we can output the grand totals
+      // defer the finish command until all the suites in the task are done, so we can output the totals
       if (data[0] === 'finish') {
         this.stringWriter.write(' \n');
       }
@@ -46,20 +46,74 @@ function SuiteRunner(suite, options){
 
 SuiteRunner.prototype = {
   constructor : SuiteRunner,
+
   run : function(callback){
-    var suiteCallback = function(result){
+    var suiteCallback = function(results){
       process.nextTick(function(){
-        callback(null, result, this.getOutput());
+        results = this.checkAsync() || results;
+        callback(null, results, this.getOutput());
       }.bind(this));
     }.bind(this);
     this.suite.run({}, suiteCallback);
   },
+
   getOutput : function(){
     return this.stringWriter.toString();
   },
+
   reportTotals : function(totals){
     this.reporter.report(['finish', totals], this.stringWriter);
+  },
+
+  checkAsync : function(){
+    var totals = { honored : 0, broken : 0, errored : 0, pending : 0, total : 0 };
+    var s = this.suite;
+    var sw = this.stringWriter;
+    var failure;
+
+    if ((s.results.total > 0) && (s.results.time === null)) {
+      sw.write('\n\n');
+      s.reporter.report(['error', { error : "Asynchronous Error", suite : s }]);
+    }
+    s.batches.forEach(function(b){
+      var unFired = [];
+
+      b.vows.forEach(function(vow){
+        if (!vow.status) {
+          if (unFired.indexOf(vow.context) === -1) {
+            unFired.push(vow.context);
+          }
+        }
+      });
+
+      if (unFired.length > 0) {
+        sw.write('\n');
+      }
+
+      unFired.forEach(function(title){
+        s.reporter.report([
+          'error', {
+            error : "callback not fired",
+            context : title,
+            batch : b,
+            suite : s
+          }
+        ]);
+      });
+
+      if (b.status === 'begin') {
+        failure = true;
+        totals.errored++;
+        totals.total++;
+      }
+      Object.keys(totals).forEach(function(k){ totals[k] += b[k] });
+    });
+
+    if (failure) {
+      return totals;
+    }
   }
+
 };
 
 module.exports = SuiteRunner;
