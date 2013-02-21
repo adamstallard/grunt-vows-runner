@@ -16,7 +16,6 @@ With grunt-vows-runner you can
 * Run suites in the same [target](http://gruntjs.com/configuring-tasks#task-configuration-and-targets)
 concurrently.
 * Set options at the target level.
-* Set the ``isolate`` option at the suite and target level, and run isolated and non-isolated suites concurrently.
 * Disable groups of tests at the target level
 
 ###Differences from the vows command-line runner
@@ -27,6 +26,8 @@ concurrently.
 * No built-in js-coverage support
  * I highly recommend [istanbul](https://github.com/yahoo/istanbul), which does not need the cooperation of the test-runner
  (simply ``istanbul cover bin/vows`` will work ); and it is written in javascript, not java
+* No 'isolate' option.  If your system-under-test uses process.cwd, process.argv, or process.exit,
+it is best to create a [child process](http://nodejs.org/api/child_process.html) in the test topic.
 
 ###Installation
 
@@ -129,8 +130,6 @@ The following options are available:
 * ``matcher``
  * a javascript [RegExp object](http://www.w3schools.com/jsref/jsref_obj_regexp.asp); only run tests whose titles match this
  object.
-* ``isolate``
- * Run each suite in its own process.  This is useful if the system-under-test uses the node process object internally.
 * ``disabled``
  * Temporarily disable tests for a target.
 
