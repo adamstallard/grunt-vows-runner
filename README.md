@@ -145,6 +145,6 @@ grunt-vows-runner incorporates the following grunt command-line options, if pres
 
 ###Alternatives
 
-If you would like a grunt plugin that simply forwards options to the existing vows command-line runner,
+If you would like a grunt plugin that forwards options to the existing vows command-line runner,
 see [grunt-vows](https://github.com/CMTegner/grunt-vows).
 
