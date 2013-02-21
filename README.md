@@ -1,6 +1,6 @@
 ##grunt-vows-runner
 
-[![Build Status](https://travis-ci.org/goalzen/grunt-vows-runner.png)](https://travis-ci.org/goalzen/grunt-vows-runner)
+[![Build Status](https://travis-ci.org/goalzen/grunt-vows-runner.png?branch=master)](https://travis-ci.org/goalzen/grunt-vows-runner)
 
 A test-runner for vows using [grunt](http://gruntjs.com/).
 
