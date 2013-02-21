@@ -4,9 +4,9 @@ var StringWriter = require('./StringWriter');
 
 var reporterBasePath = "vows/lib/vows/reporters/";
 
-function SuiteRunner(suite, options){
+function SuiteRunner(suite, options, writer){
   this.suite = suite;
-  this.stringWriter = new StringWriter();
+  this.writer = writer || new StringWriter();
 
   options = options || {};
 
@@ -16,7 +16,8 @@ function SuiteRunner(suite, options){
 
   _.defaults(options, defaultOptions);
   _.defaults(suite.options, options);
-  // special case: options.error : false set on the task/target overrides options.error : true on the suite
+  // special cases:
+  // options.error : false set on the task/target overrides true on the suite
   if (options.error === false) {
     suite.options.error = false;
   }
@@ -26,13 +27,13 @@ function SuiteRunner(suite, options){
   delete require.cache[require.resolve(reporterPath)];
   this.reporter = require(reporterPath);
 
-  this.reporter.setStream(this.stringWriter);
+  this.reporter.setStream(this.writer);
 
   suite.options.reporter = {
     report : function(data, filename){
       // defer the finish command until all the suites in the task are done, so we can output the totals
       if (data[0] === 'finish') {
-        this.stringWriter.write(' \n');
+        this.writer.write(' \n');
       }
       else {
         this.reporter.report(data, filename);
@@ -47,27 +48,27 @@ SuiteRunner.prototype = {
   constructor : SuiteRunner,
 
   run : function(callback){
-    var suiteCallback = function(results){
-      process.nextTick(function(){
-        results = this.checkAsync() || results;
-        callback(null, results, this.getOutput());
-      }.bind(this));
-    }.bind(this);
-    this.suite.run({}, suiteCallback);
+      var suiteCallback = function(results){
+        process.nextTick(function(){
+          results = this.checkAsync() || results;
+          callback(null, results, this.getOutput());
+        }.bind(this));
+      }.bind(this);
+      this.suite.run({}, suiteCallback);
   },
 
   getOutput : function(){
-    return this.stringWriter.toString();
+    return this.writer.toString();
   },
 
   reportTotals : function(totals){
-    this.reporter.report(['finish', totals], this.stringWriter);
+    this.reporter.report(['finish', totals], this.writer);
   },
 
   checkAsync : function(){
     var totals = { honored : 0, broken : 0, errored : 0, pending : 0, total : 0 };
     var s = this.suite;
-    var sw = this.stringWriter;
+    var sw = this.writer;
     var failure;
 
     if ((s.results.total > 0) && (s.results.time === null)) {
