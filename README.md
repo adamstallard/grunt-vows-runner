@@ -14,20 +14,21 @@ tools built into vows, since they are used by many other packages as well.
 
 With grunt-vows-runner you can
 
-* Use grunt [tasks](http://gruntjs.com/configuring-tasks) and [templates](http://gruntjs.com/configuring-tasks#templates).
-* Run suites in the same [target](http://gruntjs.com/configuring-tasks#task-configuration-and-targets)
-concurrently.
-* Set options at the target level.
-* Disable groups of tests at the target level
+* Use grunt [targets](http://gruntjs.com/configuring-tasks#task-configuration-and-targets) and
+[templates](http://gruntjs.com/configuring-tasks#templates).
+* Run suites in the same target concurrently.
+* Set different options for each target.
+* Have each target output to a different file (or the console).
+* Disable groups of tests at the target level.
 
 ###Differences from the vows command-line runner
 
-* Uses grunt to specify which [files](http://gruntjs.com/configuring-tasks#files) to run
-* Uses grunt's ``watch`` task instead of vows' built-in watch implementation
-* No shuffle option (if you want this, let me know--it is easy to implement)
-* No built-in js-coverage support
+* Uses grunt to specify which [files](http://gruntjs.com/configuring-tasks#files) to run.
+* Uses grunt's ``watch`` task instead of vows' built-in watch implementation.
+* No shuffle option (if you want this, let me know--it is easy to implement).
+* No built-in js-coverage support.
  * I highly recommend [istanbul](https://github.com/yahoo/istanbul), which does not need the cooperation of the test-runner
- (simply ``istanbul cover bin/vows`` will work ); and it is written in javascript, not java
+ (simply ``istanbul cover bin/vows`` will work ); and it is written in javascript, not java.
 * No 'isolate' option.  If your system-under-test uses process.cwd, process.argv, or process.exit,
 it is best to create a [child process](http://nodejs.org/api/child_process.html) in the test topic.
 
