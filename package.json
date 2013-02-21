@@ -2,7 +2,7 @@
   "name" : "grunt-vows-runner",
   "version" : "0.1.2",
   "description" :
-    "A test-runner for vows using grunt.  Adds new capabilities such as running test suites concurrently.",
+    "An alternative test-runner for vows using grunt.  Adds new capabilities such as running test suites concurrently.",
   "keywords" :
     ["vows", "test", "testing", "runner", "task", "gruntplugin", "grunt", "bdd", "concurrent", "asynchronous", "parallel"],
   "author" : {

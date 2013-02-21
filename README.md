@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/goalzen/grunt-vows-runner.png?branch=master)](https://travis-ci.org/goalzen/grunt-vows-runner)
 
-A test-runner for vows using [grunt](http://gruntjs.com/).
+An alternative test-runner for vows using [grunt](http://gruntjs.com/).
 
 ###Philosophy
 
@@ -83,7 +83,7 @@ as well as [templates](http://gruntjs.com/configuring-tasks#templates).
 One destination file (``dest``) can be specified per target.  It will contain the output of all the suites in the target.  If no
 destination file is specified, the output will go to the console.
 
-Paths for both source and destination files are relative to the directory that the ``Gruntfile.js`` is in.
+Paths for both source and destination files are relative to the location of ``Gruntfile.js``.
 
 Results are summed by target.  Grunt-vows-runner doesn't combine the results of multiple targets.
 
