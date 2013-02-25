@@ -67,7 +67,7 @@ module.exports = function(grunt){
         grunt.log.ok(targetName + " done");
         grunt.verbose.writeflags(totals);
         if(totals.errored || totals.broken){
-          done(false)
+          done(false);
         }
         else{
           done();
