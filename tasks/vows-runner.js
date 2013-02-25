@@ -35,8 +35,12 @@ module.exports = function(grunt){
 
       _.forEach(files, function(filename){
         var fullFilename = '../' + filename;
+
+        // Require the suites in the file, but don't cache them.  This way we can run them multiple times with different options.
+
         delete require.cache[require.resolve(fullFilename)];
         var file = require(fullFilename);
+
         _.forEach(file, function(suite){
           suite._filename = filename;
           grunt.verbose.writeln(targetName + ' starting "' + suite.subject + '"');
