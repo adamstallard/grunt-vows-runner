@@ -41,8 +41,8 @@ module.exports = function(grunt) {
         src : ['test/*.js'],
         dest : 'out.xml',
         options : {
-          reporter : "xunit",
-          disabled : true
+          reporter : "Xunit",
+          disabled : false
         }
       },
       json : {
@@ -54,7 +54,10 @@ module.exports = function(grunt) {
         }
       },
       vows : {
-        src : ['node_modules/vows/test/*.js']
+        src : ['node_modules/vows/test/*.js'],
+        options : {
+          disabled : false
+        }
       }
     }
   });

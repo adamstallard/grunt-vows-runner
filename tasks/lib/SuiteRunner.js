@@ -1,6 +1,7 @@
 var _ = require('grunt').util._;
 
 var StringWriter = require('./StringWriter');
+var reporters = require('vows-reporters');
 
 var reporterBasePath = "vows/lib/vows/reporters/";
 
@@ -16,18 +17,32 @@ function SuiteRunner(suite, options, writer){
 
   _.defaults(options, defaultOptions);
   _.defaults(suite.options, options);
+
   // special cases:
   // options.error : false set on the task/target overrides true on the suite
+  //
+  // TODO: get rid of this by fixing the hard-coded option in vows-core
+
   if (options.error === false) {
     suite.options.error = false;
   }
 
-  var reporterPath = reporterBasePath + suite.options.reporter;
+  // first try vows-reporters
 
-  delete require.cache[require.resolve(reporterPath)];
-  this.reporter = require(reporterPath);
+  this.reporter = reporters(suite.options.reporter, this.writer);
 
-  this.reporter.setStream(this.writer);
+  // if that didn't work try the reporters in vows itself
+  //
+  // TODO: remove this once all the reporters have been ported, and we are using vows-core
+
+  if(!this.reporter){
+    var reporterPath = reporterBasePath + suite.options.reporter;
+
+    delete require.cache[require.resolve(reporterPath)];
+    this.reporter = require(reporterPath);
+
+    this.reporter.setStream(this.writer);
+  }
 
   suite.options.reporter = {
     report : function(data, filename){

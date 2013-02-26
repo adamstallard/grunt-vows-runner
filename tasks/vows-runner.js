@@ -33,8 +33,10 @@ module.exports = function(grunt){
       var async = grunt.util.async;
       var suiteTasks = {};
 
+      grunt.verbose.oklns('current working directory: ' + process.cwd());
+
       _.forEach(files, function(filename){
-        var fullFilename = '../' + filename;
+        var fullFilename = process.cwd() + '/' + filename;
 
         // Require the suites in the file, but don't cache them.  This way we can run them multiple times with different options.
 
