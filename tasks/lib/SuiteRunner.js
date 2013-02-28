@@ -29,32 +29,35 @@ function SuiteRunner(suite, options, writer){
 
   // first try vows-reporters
 
-  this.reporter = reporters(suite.options.reporter, this.writer);
+  options.writer = this.writer;
+
+  this.reporter = reporters(suite.options.reporter, options);
 
   // if that didn't work try the reporters in vows itself
   //
-  // TODO: remove this once all the reporters have been ported, and we are using vows-core
+  // TODO: remove the stuff in the else clause once all the reporters have been ported, and we are using vows-core
 
-  if(!this.reporter){
-    var reporterPath = reporterBasePath + suite.options.reporter;
+  if(this.reporter){
+    suite.options.reporter = this.reporter;
+  } else {
+      var reporterPath = reporterBasePath + suite.options.reporter;
 
-    delete require.cache[require.resolve(reporterPath)];
-    this.reporter = require(reporterPath);
+      delete require.cache[require.resolve(reporterPath)];
+      this.reporter = require(reporterPath);
+      this.reporter.setStream(this.writer);
 
-    this.reporter.setStream(this.writer);
+      suite.options.reporter = {
+      report : function(data, filename){
+        // defer the finish event until all the suites in the task are done, so we can output the totals
+        if (data[0] === 'finish') {
+          this.writer.write(' \n');
+        }
+        else {
+          this.reporter.report(data, filename);
+        }
+      }.bind(this)
+    };
   }
-
-  suite.options.reporter = {
-    report : function(data, filename){
-      // defer the finish command until all the suites in the task are done, so we can output the totals
-      if (data[0] === 'finish') {
-        this.writer.write(' \n');
-      }
-      else {
-        this.reporter.report(data, filename);
-      }
-    }.bind(this)
-  };
 
   _.bindAll(this);
 }
@@ -79,6 +82,8 @@ SuiteRunner.prototype = {
   reportTotals : function(totals){
     this.reporter.report(['finish', totals], this.writer);
   },
+
+  // TODO: this should go in vows-core, before a suite emits 'finish' or returns results
 
   checkAsync : function(){
     var totals = { honored : 0, broken : 0, errored : 0, pending : 0, total : 0 };

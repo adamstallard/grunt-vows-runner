@@ -33,7 +33,9 @@ module.exports = function(grunt){
       var async = grunt.util.async;
       var suiteTasks = {};
 
-      grunt.verbose.oklns('current working directory: ' + process.cwd());
+      // don't show the totals until all the suites in the task are done
+
+      options.writeTotals = false;
 
       _.forEach(files, function(filename){
         var fullFilename = process.cwd() + '/' + filename;
@@ -57,13 +59,15 @@ module.exports = function(grunt){
       });
 
       async.parallel(suiteTasks, function(error, results){
+        // report the totals and exit
         var totals = _.reduce(results, function(subTotals, result){
           return _.reduce(result, function(x, total, header){
             x[header] = total + subTotals[header];
             return x;
           }, {});
         });
-        var endReporter = new SuiteRunner(vows.describe('End Totals'), options);
+        options.writeTotals = true;
+        var endReporter = new SuiteRunner(vows.describe('Totals'), options);
         endReporter.reportTotals(totals);
         writeOutput(endReporter.getOutput());
         grunt.log.ok(targetName + " done");
