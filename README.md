@@ -102,18 +102,18 @@ _Gruntfile.js_ (task- and target-level options)
         reporter : "spec"
       },
       most : {
-        src : ["test/*", "!test/chattyTests.js"]
+        src : ["test/*", "!test/errorTests.js"]
       },
-      chatty : {
-        src : "test/chattyTests.js",
+      error : {
+        src : "test/errorTests.js",
         options : {
-          reporter : "silent"
+          error : false
         }
       }
     }
     ...
 
-_test/errorTests.js_ (suite-level options)
+_test/errorTests.js_ (suite-level options) -- this is a different way to accomplish the same as above
 
     ...
     vows.describe('Error Handling').addBatch({
