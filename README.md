@@ -94,7 +94,7 @@ Options can be placed at the task (``vows``), target, or suite level.
 
 Here is an example of each:
 
-_Gruntfile.js_ (task- and target-level options)
+_Gruntfile.js_ (task- and target-level options) -- the reporter is set at the task-level
 
     ...
     vows : {
