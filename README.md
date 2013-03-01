@@ -69,7 +69,7 @@ An example ``vows`` configuration with two targets:
         src : "<%= allTests %>",
         dest : "testResults.xml"
         options : {
-          reporter : "xunit"
+          reporter : "Xunit"
         }
       }
     },
