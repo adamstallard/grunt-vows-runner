@@ -25,7 +25,7 @@ With grunt-vows-runner you can
 ###Differences from the vows command-line runner
 
 * Uses grunt to specify which [files](http://gruntjs.com/configuring-tasks#files) to run.
-* Uses grunt's ``watch`` task instead of vows' built-in watch implementation.
+* Uses grunt's ``watch`` task.
 * No shuffle option (if you want this, let me know--it is easy to implement).
 * No built-in js-coverage support.
  * I highly recommend [istanbul](https://github.com/yahoo/istanbul), which does not need the cooperation of the test-runner
