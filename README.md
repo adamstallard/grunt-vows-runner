@@ -144,8 +144,7 @@ grunt-vows-runner incorporates the following grunt command-line options, if pres
 * ``--no-color``
 * ``--verbose``
 
-###Alternatives
+###Bugs, etc.
 
-If you would like a grunt plugin that forwards options to the existing vows command-line runner,
-see [grunt-vows](https://github.com/CMTegner/grunt-vows).
+Please report any bugs, feature requests, etc. to [grunt-vows-runner's github issue tracker](https://github.com/goalzen/grunt-vows-runner/issues).
 
