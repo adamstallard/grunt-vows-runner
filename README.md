@@ -16,6 +16,7 @@ With grunt-vows-runner you can
 
 * Use grunt [targets](http://gruntjs.com/configuring-tasks#task-configuration-and-targets) and
 [templates](http://gruntjs.com/configuring-tasks#templates).
+* [Match files](http://gruntjs.com/configuring-tasks#globbing-patterns) using grunt's node-glob and minimatch support.
 * Run suites in the same target concurrently.
 * Set different options for each target.
 * Have each target output to a different file (or the console).
