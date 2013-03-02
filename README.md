@@ -127,13 +127,26 @@ The following options are available:
  * Whether or not vows should handle errors in topics for you.  Set ``error : false`` if you want to handle your own errors.
  The first argument to your vows will be reserved for errors.
 * ``reporter``
- * silent, spec, json, tap, xunit, dot-matrix.  (Look in [vows/lib/vows/reporters](https://github.com/cloudhead/vows/tree/master/lib/vows/reporters)
-  for a complete list.)
+ * [See the list of reporters](#reporters)
 * ``matcher``
  * a javascript [RegExp object](http://www.w3schools.com/jsref/jsref_obj_regexp.asp); only run tests whose titles match this
  object.
 * ``disabled``
  * Temporarily disable tests for a target.
+
+####Reporters<a id="reporters"/>
+
+The following reporters come with grunt-vows-runner:
+
+From the [vows-reporters package](https://github.com/goalzen/vows-reporters):
+
+* spec
+* Xunit
+
+From [vows](https://github.com/cloudhead/vows/tree/master/lib/vows/reporters)
+
+* tap
+* dot-matrix
 
 ###Command-Line Options
 
