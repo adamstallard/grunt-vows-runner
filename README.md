@@ -136,8 +136,6 @@ The following options are available:
 
 ####Reporters<a id="reporters"/>
 
-The following reporters come with grunt-vows-runner:
-
 From the [vows-reporters package](https://github.com/goalzen/vows-reporters):
 
 * spec
