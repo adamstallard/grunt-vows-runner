@@ -59,7 +59,9 @@ module.exports = function(grunt){
       });
 
       async.parallel(suiteTasks, function(error, results){
-        // report the totals and exit
+
+        // report the totals and tell grunt we are done
+
         var totals = _.reduce(results, function(subTotals, result){
           return _.reduce(result, function(x, total, header){
             x[header] = total + subTotals[header];
@@ -80,6 +82,8 @@ module.exports = function(grunt){
         }
       });
 
+      // helper function to write output to console or a file
+
       function writeOutput(output){
         if(outputFile){
           fs.appendFileSync(outputFile, output);
@@ -89,7 +93,9 @@ module.exports = function(grunt){
         }
       }
 
-      vows.suites = []; //so it doesn't try to do anything on process.exit (see "vows.js")
+      // TODO: remove this when we are using vows-core
+
+      vows.suites = []; // so it doesn't try to do anything on process.exit (see "vows.js")
     }
     else {
       grunt.log.error(targetName + ' no test files');
