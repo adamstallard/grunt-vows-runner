@@ -1,6 +1,6 @@
 {
   "name" : "grunt-vows-runner",
-  "version" : "0.2.0",
+  "version" : "0.2.1",
   "description" :
     "An alternative test-runner for vows using grunt.  Adds new capabilities such as running test suites concurrently.",
   "keywords" :

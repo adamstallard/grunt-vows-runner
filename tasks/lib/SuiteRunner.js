@@ -1,4 +1,4 @@
-var _ = require('grunt').util._;
+var _ = require('underscore');
 
 var StringWriter = require('./StringWriter');
 var reporters = require('vows-reporters');
