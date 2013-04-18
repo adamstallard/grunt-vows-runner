@@ -54,7 +54,11 @@ module.exports = function(grunt) {
         }
       },
       vows : {
-        src : ['node_modules/vows/test/*.js'],
+        src : [
+            'node_modules/vows/test/*.js',
+            '!node_modules/vows/test/isolate-test.js',
+            '!node_modules/vows/test/supress-stdout-test.js'
+        ],
         options : {
           disabled : false
         }
