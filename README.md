@@ -135,15 +135,26 @@ The following options are available:
 
 ####Reporters<a id="reporters"/>
 
-From the [vows-reporters package](https://github.com/goalzen/vows-reporters):
+From grunt-vows-runner:
 
 * spec
-* Xunit
+* xunit
+  * Produces output meant for [Jenkins CI](http://jenkins-ci.org/). It tries to divide the tests into a hierarchy of levels
+   for easier navigation in the Jenkins test report.
+  * Use the colon (':') character to separate levels.  For example if you had a topic (or a subtopic,
+   or combination) that looked like this:
+
+        ``Monkeys: grooming``
+
+        then there would be a "Monkeys" folder in Jenkins with a "grooming" folder inside of it, containing the test results.
 
 From [vows](https://github.com/cloudhead/vows/tree/master/lib/vows/reporters)
 
 * tap
 * dot-matrix
+* json
+
+Request any other reporters [here](https://github.com/goalzen/grunt-vows-runner/issues)
 
 ###Command-Line Options
 
