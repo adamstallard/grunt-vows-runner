@@ -32,7 +32,7 @@ function SuiteRunner(suite, options, writer){
 
   options.writer = this.writer;
 
-  this.reporter = getReporter(suite.options.reporter, options);
+  this.reporter = getReporter(suite.options.reporter.toLowerCase(), options);
 
   // if that didn't work try the reporters in vows itself
   //
