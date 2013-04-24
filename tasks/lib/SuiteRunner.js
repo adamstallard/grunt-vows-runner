@@ -1,7 +1,8 @@
+'use strict';
+
 var _ = require('underscore');
 
 var StringWriter = require('./StringWriter');
-var reporters = require('vows-reporters');
 
 var reporterBasePath = "vows/lib/vows/reporters/";
 
@@ -27,26 +28,27 @@ function SuiteRunner(suite, options, writer){
     suite.options.error = false;
   }
 
-  // first try vows-reporters
+  // first try our own collection of reporters
 
   options.writer = this.writer;
 
-  this.reporter = reporters(suite.options.reporter, options);
+  this.reporter = getReporter(suite.options.reporter, options);
 
   // if that didn't work try the reporters in vows itself
   //
   // TODO: remove the stuff in the else clause once all the reporters have been ported, and we are using vows-core
 
-  if(this.reporter){
+  if (this.reporter) {
     suite.options.reporter = this.reporter;
-  } else {
-      var reporterPath = reporterBasePath + suite.options.reporter;
+  }
+  else {
+    var reporterPath = reporterBasePath + suite.options.reporter;
 
-      delete require.cache[require.resolve(reporterPath)];
-      this.reporter = require(reporterPath);
-      this.reporter.setStream(this.writer);
+    delete require.cache[require.resolve(reporterPath)];
+    this.reporter = require(reporterPath);
+    this.reporter.setStream(this.writer);
 
-      suite.options.reporter = {
+    suite.options.reporter = {
       report : function(data, filename){
         // defer the finish event until all the suites in the task are done, so we can output the totals
         if (data[0] === 'finish') {
@@ -66,21 +68,27 @@ SuiteRunner.prototype = {
   constructor : SuiteRunner,
 
   run : function(callback){
-      var suiteCallback = function(results){
-        process.nextTick(function(){
-          results = this.checkAsync() || results;
-          callback(null, results, this.getOutput());
-        }.bind(this));
-      }.bind(this);
-      this.suite.run({}, suiteCallback);
+    var suiteCallback = function(results){
+      process.nextTick(function(){
+        results = this.checkAsync() || results;
+        callback(null, results, this.getOutput());
+      }.bind(this));
+    }.bind(this);
+    this.suite.run({}, suiteCallback);
   },
 
   getOutput : function(){
     return this.writer.toString();
   },
 
-  reportTotals : function(totals){
-    this.reporter.report(['finish', totals], this.writer);
+  start : function(){
+    this.reporter.report(['start'], this.writer);
+    return this.getOutput();
+  },
+
+  results : function(results){
+    this.reporter.report(['results', results], this.writer);
+    return this.getOutput();
   },
 
   // TODO: this should go in vows-core, before a suite emits 'finish' or returns results
@@ -126,7 +134,9 @@ SuiteRunner.prototype = {
         totals.errored++;
         totals.total++;
       }
-      Object.keys(totals).forEach(function(k){ totals[k] += b[k] });
+      Object.keys(totals).forEach(function(k){
+        totals[k] += b[k];
+      });
     });
 
     if (failure) {
@@ -135,5 +145,18 @@ SuiteRunner.prototype = {
   }
 
 };
+
+function getReporter(reporter, options){
+  var Reporter;
+  try{
+    Reporter = require('./reporters/' + reporter);
+  } catch (e){
+    return;
+  }
+  _.defaults(options, {
+    writer : process.stdout
+  });
+  return new Reporter(options);
+}
 
 module.exports = SuiteRunner;

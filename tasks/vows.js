@@ -1,41 +1,41 @@
+'use strict';
+
 var fs = require('fs');
 var SuiteRunner = require('./lib/SuiteRunner');
 var vowsConsole = require('vows/lib/vows/console');
 var vows = require('vows');
 
 module.exports = function(grunt){
-
-  vowsConsole.nocolor = grunt.option('no-color');
-
+  var helper = new VowsHelper(grunt);
   grunt.registerMultiTask('vows', 'Runs vows tests.', function(){
     var files = this.files[0].src;
     var targetName = this.name + ':' + this.target;
     var done = this.async();
     var options = this.options();
+
     if(options.disabled){
       grunt.log.ok(targetName + ' tests disabled');
       done();
       return;
     }
+
     grunt.verbose.subhead(targetName + ' options').writeflags(options);
 
     if (files.length) {
-      var outputFile = this.files[0].dest;
-      if (outputFile) {
+      helper.outputFile = this.files[0].dest;
+
+      if (helper.outputFile) {
         grunt.verbose.writeln(targetName + ' deleting output file');
         try {
-          fs.unlinkSync(outputFile);
+          fs.unlinkSync(helper.outputFile);
         } catch(e) {}
-        grunt.verbose.writeln(targetName + ' writing output to "' + outputFile + '"');
+        grunt.verbose.writeln(targetName + ' writing output to "' + helper.outputFile + '"');
       }
 
       var _ = grunt.util._;
       var async = grunt.util.async;
       var suiteTasks = {};
-
-      // don't show the totals until all the suites in the task are done
-
-      options.writeTotals = false;
+      helper.writeOutput(new SuiteRunner(vows.describe('Start'), options).start());
 
       _.forEach(files, function(filename){
         var fullFilename = process.cwd() + '/' + filename;
@@ -51,11 +51,12 @@ module.exports = function(grunt){
           var suiteRunner = new SuiteRunner(suite, options);
           suiteTasks[suite.subject] = function(callback){
             suiteRunner.run(function(error, result, output){
-              writeOutput(output);
+              helper.writeOutput(output);
               callback(error, result);
             });
-          }
+          };
         });
+
       });
 
       async.parallel(suiteTasks, function(error, results){
@@ -68,30 +69,19 @@ module.exports = function(grunt){
             return x;
           }, {});
         });
-        options.writeTotals = true;
-        var endReporter = new SuiteRunner(vows.describe('Totals'), options);
-        endReporter.reportTotals(totals);
-        writeOutput(endReporter.getOutput());
+
+        helper.writeOutput(new SuiteRunner(vows.describe('Results'), options).results(totals));
         grunt.log.ok(targetName + " done");
         grunt.verbose.writeflags(totals);
+
         if(totals.errored || totals.broken){
           done(false);
         }
         else{
           done();
         }
+
       });
-
-      // helper function to write output to console or a file
-
-      function writeOutput(output){
-        if(outputFile){
-          fs.appendFileSync(outputFile, output);
-        }
-        else{
-          grunt.log.oklns(output);
-        }
-      }
 
       // TODO: remove this when we are using vows-core
 
@@ -104,5 +94,20 @@ module.exports = function(grunt){
   });
 };
 
+function VowsHelper(grunt){
+  this.grunt = grunt;
+  vowsConsole.nocolor = grunt.option('no-color');
+}
+
+VowsHelper.prototype = {
+  writeOutput : function(output){
+    if(this.outputFile){
+      fs.appendFileSync(this.outputFile, output);
+    }
+    else{
+      this.grunt.log.oklns(output);
+    }
+  }
+};
 
 
