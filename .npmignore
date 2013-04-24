@@ -1,7 +1,11 @@
-test
-\.idea
-\.hgignore
-\.gitignore
-\.hg
+.idea
+.hgignore
+.gitignore
+.npmignore
+.hg
+.travis.yml
+.jshintrc
 Gruntfile.js
-\.travis.yml
+test
+out.*
+projectFilesBackup
