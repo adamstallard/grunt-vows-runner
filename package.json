@@ -1,6 +1,6 @@
 {
   "name" : "grunt-vows-runner",
-  "version" : "0.5.1",
+  "version" : "0.5.2",
   "description" :
     "An alternative test-runner for vows using grunt.  Adds new capabilities such as running test suites concurrently.",
   "keywords" :
@@ -14,15 +14,16 @@
     "test" : "test"
   },
   "dependencies" : {
-    "underscore" : "*",
-    "vows" : "*"
+    "underscore" : "*"
   },
   "peerDependencies" : {
     "grunt" : "~0.4",
     "vows" : "*"
   },
   "devDependencies" : {
+    "vows" : "*",
     "chai" : "*",
+    "grunt" : "~0.4",
     "grunt-contrib-jshint" : "*"
   },
   "license" : {
