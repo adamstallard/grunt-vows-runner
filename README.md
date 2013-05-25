@@ -37,8 +37,10 @@ it is best to create a [child process](http://nodejs.org/api/child_process.html)
 1. Change directories to the root directory of your project
 2. ``npm install grunt-vows-runner``
 3. Add the following line to your ``Gruntfile.js``
-   
-   ``grunt.loadNpmTasks('grunt-vows-runner');``
+
+```javascript
+grunt.loadNpmTasks('grunt-vows-runner');
+```
 
 ###Configuration
 
