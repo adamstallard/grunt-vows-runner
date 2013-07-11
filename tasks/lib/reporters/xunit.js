@@ -4,7 +4,7 @@
 
 'use strict';
 
-var _ = require('underscore');
+var _ = require('lodash');
 var vowsConsole = require('vows/lib/vows/console');
 
 function Xunit(options){
