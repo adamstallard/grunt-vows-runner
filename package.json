@@ -1,47 +1,57 @@
 {
-  "name" : "grunt-vows-runner",
-  "version" : "0.6.0",
-  "description" :
-    "An alternative test-runner for vows using grunt.  Adds new capabilities such as running test suites concurrently.",
-  "keywords" :
-    ["vows", "test", "testing", "runner", "task", "gruntplugin", "grunt", "bdd", "concurrent", "asynchronous", "parallel"],
-  "author" : {
-    "name" : "Adam Stallard",
-    "email" : "adam@goalzen.org",
-    "url" : "goalzen.org"
+  "name": "grunt-vows-runner",
+  "version": "0.6.0",
+  "description": "An alternative test-runner for vows using grunt.  Adds new capabilities such as running test suites concurrently.",
+  "keywords": [
+    "vows",
+    "test",
+    "testing",
+    "runner",
+    "task",
+    "gruntplugin",
+    "grunt",
+    "bdd",
+    "concurrent",
+    "asynchronous",
+    "parallel"
+  ],
+  "author": {
+    "name": "Adam Stallard",
+    "email": "adam@goalzen.org",
+    "url": "goalzen.org"
   },
-  "directories" : {
-    "test" : "test"
+  "directories": {
+    "test": "test"
   },
-  "dependencies" : {
-    "lodash" : "*"
+  "dependencies": {
+    "lodash": "*"
   },
-  "peerDependencies" : {
-    "grunt" : "~0.4",
-    "vows" : "*"
+  "peerDependencies": {
+    "grunt": ">=0.4.0",
+    "vows": "*"
   },
-  "devDependencies" : {
-    "vows" : "*",
-    "chai" : "*",
-    "grunt" : "~0.4",
-    "grunt-contrib-jshint" : "*"
+  "devDependencies": {
+    "vows": "*",
+    "chai": "*",
+    "grunt": "~0.4",
+    "grunt-contrib-jshint": "*"
   },
-  "license" : {
-    "type" : "MIT",
-    "url" : "https://github.com/goalzen/grunt-vows-runner/blob/master/LICENSE-MIT"
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/goalzen/grunt-vows-runner/blob/master/LICENSE-MIT"
   },
-  "engines" : {
-    "node" : ">=0.8.0"
+  "engines": {
+    "node": ">=0.8.0"
   },
-  "scripts" : {
-    "test" : "grunt"
+  "scripts": {
+    "test": "grunt"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/goalzen/grunt-vows-runner.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/goalzen/grunt-vows-runner.git"
   },
-  "bugs" : {
-    "url" : "https://github.com/goalzen/grunt-vows-runner/issues"
-},
-  "homepage" : "https://github.com/goalzen/grunt-vows-runner.git"
+  "bugs": {
+    "url": "https://github.com/goalzen/grunt-vows-runner/issues"
+  },
+  "homepage": "https://github.com/goalzen/grunt-vows-runner.git"
 }
